@@ -9,7 +9,7 @@ A Showcase of Applications Developed using ProvenanceWidgets.
 
 ## Run
 - `npm run start`
-- Open the browser (preferrably Chrome) at [http://localhost:4200](http://localhost:4200).
+- Open the browser (preferably Chrome) at [http://localhost:4200](http://localhost:4200).
 
 ## Test
 - `npm run test`
