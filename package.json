@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production",
+    "build": "ng build --base-href /showcase/ --configuration production",
     "test": "ng test --browsers=ChromeHeadless --progress=false --watch=false",
     "postinstall": "ng build --aot --configuration production"
   },
