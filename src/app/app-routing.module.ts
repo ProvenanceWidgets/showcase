@@ -8,10 +8,11 @@ import { PhosphorObjectsComponent } from "./applications/phosphor-objects/compon
 import { DataDistributionComponent } from "./applications/data-distribution/component";
 import { VisToWidgetsOneWayComponent } from "./applications/vis-to-widgets-one-way/component";
 import { WidgetsToVisOneWayComponent } from "./applications/widgets-to-vis-one-way/component";
+import { HomeComponent } from "./applications/home/component";
 
 
 const routes: Routes = [
-  { path: '', component: PlaygroundComponent }, 
+  { path: '', component: HomeComponent }, 
   { path: 'playground', component: PlaygroundComponent }, 
   { path: 'scented-widgets', component: ScentedWidgetsComponent }, 
   { path: 'phosphor-objects', component: PhosphorObjectsComponent }, 

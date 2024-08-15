@@ -22,6 +22,7 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
 
 // Local App Imports
 
+import { HomeComponent } from "./applications/home/component";
 import { PlaygroundComponent } from "./applications/playground/component";
 import { ScentedWidgetsComponent } from "./applications/scented-widgets/component";
 import { PhosphorObjectsComponent } from "./applications/phosphor-objects/component";
@@ -58,6 +59,7 @@ import { ProvenanceWidgetsModule } from "provenance-widgets";
   ],
   declarations: [
     AppComponent,
+    HomeComponent,
     PlaygroundComponent,
     ScentedWidgetsComponent,
     PhosphorObjectsComponent,
@@ -69,6 +71,7 @@ import { ProvenanceWidgetsModule } from "provenance-widgets";
   ],
   providers: [
     Title,
+    HomeComponent,
     PlaygroundComponent,
     ScentedWidgetsComponent,
     PhosphorObjectsComponent,

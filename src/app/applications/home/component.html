@@ -1,0 +1,111 @@
+<div class="container">
+  <br />
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1><img src="assets/images/logo-dark.png" height="48" alt="ProvenanceWidgets Logo" />ProvenanceWidgets <span class="text-muted">| Showcase</span></h1>
+      <h3 class="text-muted">A JavaScript Library of UI Controls to Track and Dynamically Overlay Analytic Provenance
+      </h3>
+      <br/>
+      <h5>Arpit Narechania, Kaustubh Odak, Mennatallah El-Assady, Alex Endert</h5>
+      <h5>Georgia Institute of Technology and ETH Zürich</h5>
+      <div class="text-center mt-md">
+        <a href="https://github.com/ProvenanceWidgets/showcase/tree/main/src/app/applications" target="_blank" class="btn btn-secondary"><i
+            class="pi pi-github"></i>&nbsp;View on GitHub</a>&nbsp;
+            <a href="https://ProvenanceWidgets.github.io" target="_blank" class="btn btn-success"><i
+              class="pi pi-rocket"></i>&nbsp;Homepage and Documentation</a>
+      </div>
+    </div>
+  </div>
+  <hr style="margin-top: 30px;">
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Showcase</h4>
+      <br />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <p-card class="w-100 cursor-pointer" (click)="navigateToRoute('/playground')">
+        <ng-template pTemplate="subtitle">
+          <h5 class="text-center">Playground</h5>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <img style="border:1px solid grey" src="assets/images/playground.png" width="100%" />
+        </ng-template>
+      </p-card>
+    </div>
+    <div class="col-md-3" (click)="navigateToRoute('/scented-widgets')">
+      <p-card class="w-100 cursor-pointer">
+        <ng-template pTemplate="subtitle">
+          <h5 class="text-center">Scented Widgets</h5>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <img style="border:1px solid grey" src="assets/images/scented-widgets.png" width="100%" />
+        </ng-template>
+      </p-card>
+    </div>
+    <div class="col-md-3">
+      <p-card class="w-100 cursor-pointer" (click)="navigateToRoute('/phosphor-objects')">
+        <ng-template pTemplate="subtitle">
+          <h5 class="text-center">Phosphor Objects</h5>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <img style="border:1px solid grey" src="assets/images/phosphor-objects.png" width="100%" />
+        </ng-template>
+      </p-card>
+    </div>
+    <div class="col-md-3">
+      <p-card class="w-100 cursor-pointer" (click)="navigateToRoute('/data-distribution')">
+        <ng-template pTemplate="subtitle">
+          <h5 class="text-center">Data Distribution</h5>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <img style="border:1px solid grey" src="assets/images/data-distribution.png" width="100%" />
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-3">
+      <p-card class="w-100 cursor-pointer" (click)="navigateToRoute('/vega-example')">
+        <ng-template pTemplate="subtitle">
+          <h5 class="text-center">Vega Integration</h5>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <img style="border:1px solid grey" src="assets/images/vega-example.png" width="100%" />
+        </ng-template>
+      </p-card>
+    </div>
+    <div class="col-md-3">
+      <p-card class="w-100 cursor-pointer" (click)="navigateToRoute('/dynamic-query-widgets-homefinder')">
+        <ng-template pTemplate="subtitle">
+          <h5 class="text-center">Dynamic Query Widgets</h5>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <img style="border:1px solid grey" src="assets/images/dynamic-query-widgets-homefinder.png" width="100%" />
+        </ng-template>
+      </p-card>
+    </div>
+    <div class="col-md-3">
+      <p-card class="w-100 cursor-pointer" (click)="navigateToRoute('/widgets-to-vis-one-way')">
+        <ng-template pTemplate="subtitle">
+          <h5 class="text-center">Widgets to Visualization one-way</h5>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <img style="border:1px solid grey" src="assets/images/widgets-to-vis-one-way.png" width="100%" />
+        </ng-template>
+      </p-card>
+    </div>
+    <div class="col-md-3">
+      <p-card class="w-100 cursor-pointer" (click)="navigateToRoute('/vis-to-widgets-one-way')">
+        <ng-template pTemplate="subtitle">
+          <h5 class="text-center">Visualization to Widgets one-way</h5>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <img style="border:1px solid grey" src="assets/images/vis-to-widgets-one-way.png" width="100%" />
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>
