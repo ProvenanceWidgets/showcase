@@ -15,8 +15,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void { }
 
   navigateToRoute(route:string){
-    const url = `${window.location.origin}/#/${route}`;
-  window.open(url, '_blank');
+    const url = `${window.location.origin}/showcase/#/${route}`;
+    window.open(url, '_blank');
     // this.router.navigateByUrl(route, '_blank');
   }
 }
