@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { Location } from '@angular/common';
 
 @Component({
   selector: "home",
@@ -9,14 +10,14 @@ import { Router } from "@angular/router";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private location: Location) {
   }
 
   ngOnInit(): void { }
 
   navigateToRoute(route:string){
-    const url = `${window.location.origin}/showcase/#/${route}`;
+    const baseHref = this.location.prepareExternalUrl('');
+    const url = `${window.location.origin}${baseHref}#/${route}`;
     window.open(url, '_blank');
-    // this.router.navigateByUrl(route, '_blank');
   }
 }
