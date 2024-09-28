@@ -21,5 +21,5 @@ A Showcase of Applications Developed using ProvenanceWidgets.
 - GitHub Actions is setup via the `.github/workflows/build.yaml` file. Built files are pushed to `gh-pages` branch and served via GitHub Pages at [https://provenancewidgets.github.io/showcase](https://provenancewidgets.github.io/showcase).
 
 ## Development vs. Building Configurations for base-href
-- Development: Because the app served from `/` while developing locally, index.html must be configured with `<base href="/" />`.
-- Build: Because the app is eventually served from `/showcase` (and not `/`), index.html must be configured with `<base href="/showcase/" />`. In addition, we pass `--base-href /showcase/` in the `ng build` command (already configured to do this as part of `npm run build`, see package.json).
+- Development: Because the app served from `/` while developing locally, index.html must be configured with `<base href="/" />` and `src/app/applications/home/component.ts` must have the `url` set to `${window.location.origin}/#/${route};`.
+- Build: Because the app is eventually served from `/showcase` (and not `/`), index.html must be configured with `<base href="/showcase/" />` and `src/app/applications/home/component.ts` must have the `url` set to `${window.location.origin}/showcase/#/${route};`. In addition, we pass `--base-href /showcase/` in the `ng build` command (already configured to do this as part of `npm run build`, see package.json).
