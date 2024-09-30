@@ -10,7 +10,101 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class PhosphorObjectsComponent implements OnInit, AfterViewInit {
 
-  widgetModel: object;
+  widgetModel: object = {
+    singleSlider: {
+      model: {
+        value: 25,
+        provenance: {}
+      },
+      config: { floor: 0, ceil: 100, showTicks: true, tickStep: 5 },
+      mode: {
+        options: [{ label: "Interaction", value: "interaction" }, { label: "Time", value: "time" }],
+        value: "interaction"
+      }
+    },
+    rangeSlider: {
+      config: { floor: 0, ceil: 250, showTicks: true, tickStep: 15 },
+      model: {
+        value: 75,
+        highValue: 180,
+        provenance: {},
+      },
+      mode: {
+        options: [{ label: "Interaction", value: "interaction" }, { label: "Time", value: "time" }],
+        value: "interaction"
+      }
+    },
+    singleSelectDropdown: {
+      model: {
+        options: [
+          { name: 'New York', code: 'NY' },
+          { name: 'Rome', code: 'RM' },
+          { name: 'London', code: 'LDN' }
+        ],
+        value: { },
+        provenance: {},
+      },
+      mode: {
+        options: [{ label: "Interaction", value: "interaction" }, { label: "Time", value: "time" }],
+        value: "interaction"
+      }
+    },
+    multiSelectDropdown: {
+      model: {
+        options: [
+          { name: 'New York', code: 'NY' },
+          { name: 'Rome', code: 'RM' },
+          { name: 'London', code: 'LDN' }
+        ],
+        value: [],
+        provenance: {},
+      },
+      mode: {
+        options: [{ label: "Interaction", value: "interaction" }, { label: "Time", value: "time" }],
+        value: "interaction"
+      }
+    },
+    checkboxGroup: {
+      model: {
+        options: [
+          { label: 'New York', value: 'NY' },
+          { label: 'Rome', value: 'RM' },
+          { label: 'London', value: 'LDN' }
+        ],
+        value: [],
+        provenance: {},
+      },
+      mode: {
+        options: [{ label: "Interaction", value: "interaction" }, { label: "Time", value: "time" }],
+        value: "interaction"
+      }
+    },
+    radioButtonGroup: {
+      model: {
+        options: [
+          { label: 'New York', value: 'NY' },
+          { label: 'Rome', value: 'RM' },
+          { label: 'London', value: 'LDN' }
+        ],
+        value: undefined,
+        provenance: {}
+      },
+      mode: {
+        options: [{ label: "Interaction", value: "interaction" }, { label: "Time", value: "time" }],
+        value: "interaction"
+      }
+    },
+    inputText: {
+      model: {
+        value: null,
+        provenance: {}
+      },
+      mode: {
+        options: [{ label: "Interaction", value: "interaction" }, { label: "Time", value: "time" }],
+        value: "interaction"
+      }
+    }
+  };
 
   constructor(
     private router: Router,
@@ -104,102 +198,6 @@ export class PhosphorObjectsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void { }
   
-  ngOnInit(): void {
-    this.widgetModel = {
-      singleSlider: {
-        model: {
-          value: 25,
-          provenance: {}
-        },
-        config: { floor: 0, ceil: 100, showTicks: true, tickStep: 5 },
-        mode: {
-          options: [{ label: "Interaction", value: "interaction" }, { label: "Time", value: "time" }],
-          value: "interaction"
-        }
-      },
-      rangeSlider: {
-        config: { floor: 0, ceil: 250, showTicks: true, tickStep: 15 },
-        model: {
-          value: 75,
-          highValue: 180,
-          provenance: {},
-        },
-        mode: {
-          options: [{ label: "Interaction", value: "interaction" }, { label: "Time", value: "time" }],
-          value: "interaction"
-        }
-      },
-      singleSelectDropdown: {
-        model: {
-          options: [
-            { name: 'New York', code: 'NY' },
-            { name: 'Rome', code: 'RM' },
-            { name: 'London', code: 'LDN' }
-          ],
-          value: { },
-          provenance: {},
-        },
-        mode: {
-          options: [{ label: "Interaction", value: "interaction" }, { label: "Time", value: "time" }],
-          value: "interaction"
-        }
-      },
-      multiSelectDropdown: {
-        model: {
-          options: [
-            { name: 'New York', code: 'NY' },
-            { name: 'Rome', code: 'RM' },
-            { name: 'London', code: 'LDN' }
-          ],
-          value: [],
-          provenance: {},
-        },
-        mode: {
-          options: [{ label: "Interaction", value: "interaction" }, { label: "Time", value: "time" }],
-          value: "interaction"
-        }
-      },
-      checkboxGroup: {
-        model: {
-          options: [
-            { label: 'New York', value: 'NY' },
-            { label: 'Rome', value: 'RM' },
-            { label: 'London', value: 'LDN' }
-          ],
-          value: [],
-          provenance: {},
-        },
-        mode: {
-          options: [{ label: "Interaction", value: "interaction" }, { label: "Time", value: "time" }],
-          value: "interaction"
-        }
-      },
-      radioButtonGroup: {
-        model: {
-          options: [
-            { label: 'New York', value: 'NY' },
-            { label: 'Rome', value: 'RM' },
-            { label: 'London', value: 'LDN' }
-          ],
-          value: undefined,
-          provenance: {}
-        },
-        mode: {
-          options: [{ label: "Interaction", value: "interaction" }, { label: "Time", value: "time" }],
-          value: "interaction"
-        }
-      },
-      inputText: {
-        model: {
-          value: null,
-          provenance: {}
-        },
-        mode: {
-          options: [{ label: "Interaction", value: "interaction" }, { label: "Time", value: "time" }],
-          value: "interaction"
-        }
-      }
-    };
-  }
+  ngOnInit(): void { }
 
 }

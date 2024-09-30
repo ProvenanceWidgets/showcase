@@ -114,8 +114,6 @@ export class PlaygroundComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {}
 
-  ngAfterViewInit(): void {
-    // todo
-  }
+  ngAfterViewInit(): void {}
 
 }
