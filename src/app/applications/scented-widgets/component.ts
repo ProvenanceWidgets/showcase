@@ -427,11 +427,12 @@ export class ScentedWidgetsComponent implements OnInit, AfterViewInit {
     };
     context.widgetModel['inputText']['isFrozen'] = true;
 
-
     // Detect changes
     context.changeDetectorRef.detectChanges();
   }
 
   ngOnInit(): void {
+    let context = this;
+    context.changeDetectorRef.detectChanges();
   }
 }

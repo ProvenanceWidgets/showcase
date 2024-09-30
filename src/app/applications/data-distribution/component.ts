@@ -135,6 +135,7 @@ export class DataDistributionComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void { 
     let context = this;
+
     context.widgetModel['singleSlider']['model']['provenance'] = {
       revalidate: true,
       "data": [
@@ -624,10 +625,12 @@ export class DataDistributionComponent implements OnInit, AfterViewInit {
     };
     context.widgetModel['inputText']['isFrozen'] = true;
 
-
     // Detect changes
     context.changeDetectorRef.detectChanges();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let context = this;
+    context.changeDetectorRef.detectChanges();
+  }
 }
