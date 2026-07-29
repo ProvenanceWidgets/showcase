@@ -1,162 +1,59 @@
-import { Link } from "react-router-dom";
-
-const demos = [
-    {
-        title: "Playground",
-        description: "Explore the complete set of provenance-aware UI controls.",
-        image: "playground.png",
-        path: "/playground",
-        available: true,
-    },
-    {
-        title: "Widgets to Visualization",
-        description: "See widget interactions update a visualization.",
-        image: "widgets-to-vis-one-way.png",
-        path: "/widgets-to-vis",
-    },
-    {
-        title: "Visualization to Widgets",
-        description: "Drive widget state directly from visualization interactions.",
-        image: "vis-to-widgets-one-way.png",
-        path: "/vis-to-widgets",
-    },
-    {
-        title: "Vega Integration",
-        description: "Connect provenance-aware controls to a Vega visualization.",
-        image: "vega-example.png",
-        path: "/vega-example",
-    },
-    {
-        title: "Dynamic Query Widgets",
-        description: "Find homes using coordinated dynamic query controls.",
-        image: "dynamic-query-widgets-homefinder.png",
-        path: "/homefinder",
-    },
-    {
-        title: "Phosphor Objects",
-        description: "Inspect provenance embedded in interactive visual objects.",
-        image: "phosphor-objects.png",
-        path: "/phosphor-objects",
-    },
-    {
-        title: "Scented Widgets",
-        description: "Augment controls with visual cues about the underlying data.",
-        image: "scented-widgets.png",
-        path: "/scented-widgets",
-    },
-    {
-        title: "Data Distribution",
-        description: "Explore coordinated provenance across a rich analytic view.",
-        image: "data-distribution.png",
-        path: "/data-distribution",
-    },
-];
-
-function DemoCard({ demo }) {
-    const imageUrl = `${import.meta.env.BASE_URL}assets/images/${demo.image}`;
-    const content = (
-        <>
-            <div className="demo-card__image-wrap">
-                <img
-                    className="demo-card__image"
-                    src={imageUrl}
-                    alt=""
-                />
-            </div>
-            <div className="demo-card__content">
-                <div className="demo-card__heading">
-                    <h3>{demo.title}</h3>
-                    <span
-                        className={`status-badge${
-                            demo.available ? " status-badge--ready" : ""
-                        }`}
-                    >
-                        {demo.available ? "Available" : "Coming soon"}
-                    </span>
-                </div>
-                <p>{demo.description}</p>
-            </div>
-        </>
-    );
-
-    if (demo.available) {
-        return (
-            <Link
-                className="demo-card demo-card--link"
-                to={demo.path}
-                aria-label={`Open ${demo.title}`}
-            >
-                {content}
-            </Link>
-        );
-    }
-
-    return (
-        <article className="demo-card demo-card--disabled" aria-disabled="true">
-            {content}
-        </article>
-    );
-}
+import Navigation from "../components/Navigation";
 
 export default function HomePage() {
     const logoUrl = `${import.meta.env.BASE_URL}assets/images/logo-dark.png`;
 
     return (
         <div className="home-page">
-            <section className="hero" aria-labelledby="showcase-title">
-                <div className="hero__eyebrow">Interactive demo collection</div>
-                <h1 id="showcase-title">
+            <header className="showcase-intro">
+                <h1>
                     <img src={logoUrl} alt="" />
-                    ProvenanceWidgets
-                    <span>Showcase</span>
+                    <span>ProvenanceWidgets</span>
+                    <span className="showcase-intro__divider">|</span>
+                    <span className="showcase-intro__muted">Showcase</span>
                 </h1>
-                <p className="hero__summary">
-                    A JavaScript library of UI controls for tracking and
-                    dynamically overlaying analytic provenance.
+                <p className="showcase-intro__tagline">
+                    A JavaScript Library of UI Controls to Track and Dynamically
+                    Overlay Analytic Provenance
                 </p>
-                <p className="hero__authors">
-                    Arpit Narechania, Kaustubh Odak, Mennatallah El-Assady,
-                    and Alex Endert
-                </p>
-                <p className="hero__institutions">
-                    Georgia Institute of Technology and ETH Zürich
-                </p>
-                <div className="hero__actions">
+                <div className="showcase-intro__credits">
+                    <p>
+                        Arpit Narechania, Kaustubh Odak, Mennatallah El-Assady,
+                        Alex Endert
+                    </p>
+                    <p>Georgia Institute of Technology and ETH Zürich</p>
+                </div>
+                <div className="showcase-intro__actions">
                     <a
-                        className="button button--secondary"
+                        className="showcase-button showcase-button--github"
                         href="https://github.com/ProvenanceWidgets/showcase"
                         target="_blank"
                         rel="noreferrer"
                     >
+                        <svg aria-hidden="true" viewBox="0 0 24 24">
+                            <path
+                                fill="currentColor"
+                                d="M12 .7a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2.23c-3.22.7-3.9-1.37-3.9-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.26 3.38.97.1-.75.4-1.27.74-1.56-2.57-.29-5.28-1.28-5.28-5.69 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.47.11-3.06 0 0 .97-.31 3.16 1.18a10.94 10.94 0 0 1 5.76 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.23 2.76.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.42-2.71 5.4-5.29 5.69.42.36.79 1.07.79 2.16v3.2c0 .31.21.67.8.55A11.5 11.5 0 0 0 12 .7Z"
+                            />
+                        </svg>
                         View on GitHub
                     </a>
                     <a
-                        className="button button--primary"
+                        className="showcase-button showcase-button--docs"
                         href="https://provenancewidgets.github.io"
                         target="_blank"
                         rel="noreferrer"
                     >
-                        Homepage and documentation
+                        Homepage and Documentation
                     </a>
                 </div>
-            </section>
+            </header>
 
-            <section className="showcase-section" aria-labelledby="demos-title">
-                <div className="section-heading">
-                    <div>
-                        <p className="section-heading__eyebrow">Examples</p>
-                        <h2 id="demos-title">Explore the showcase</h2>
-                    </div>
-                    <p>
-                        Demos are being migrated to the ProvenanceWidgets V2
-                        component library.
-                    </p>
-                </div>
-                <div className="demo-grid">
-                    {demos.map((demo) => (
-                        <DemoCard demo={demo} key={demo.path} />
-                    ))}
-                </div>
+            <hr />
+
+            <section className="showcase-demos" aria-labelledby="demos-title">
+                <h2 id="demos-title">Showcase</h2>
+                <Navigation />
             </section>
         </div>
     );

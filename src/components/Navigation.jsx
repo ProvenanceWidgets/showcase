@@ -1,40 +1,67 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const navigationItems = [
-    { label: "Home", to: "/", end: true },
-    { label: "Playground", to: "/playground" },
+const demos = [
+    {
+        title: "Playground",
+        image: "playground.png",
+        path: "/playground",
+    },
+    {
+        title: "Scented Widgets",
+        image: "scented-widgets.png",
+    },
+    {
+        title: "Phosphor Objects",
+        image: "phosphor-objects.png",
+    },
+    {
+        title: "Data Distribution",
+        image: "data-distribution.png",
+    },
+    {
+        title: "Vega Integration",
+        image: "vega-example.png",
+    },
+    {
+        title: "Dynamic Query Widgets",
+        image: "dynamic-query-widgets-homefinder.png",
+    },
+    {
+        title: "Widgets to Visualization one-way",
+        image: "widgets-to-vis-one-way.png",
+    },
+    {
+        title: "Visualization to Widgets one-way",
+        image: "vis-to-widgets-one-way.png",
+    },
 ];
 
-export default function Navigation() {
-    const logoUrl = `${import.meta.env.BASE_URL}assets/images/logo-dark.png`;
+function DemoCard({ demo }) {
+    const imageUrl = `${import.meta.env.BASE_URL}assets/images/${demo.image}`;
+    const content = (
+        <>
+            <h3>{demo.title}</h3>
+            <img src={imageUrl} alt={`${demo.title} demo`} />
+        </>
+    );
 
+    if (demo.path) {
+        return (
+            <Link className="demo-card" to={demo.path}>
+                {content}
+            </Link>
+        );
+    }
+
+    return <div className="demo-card">{content}</div>;
+}
+
+export default function Navigation() {
     return (
-        <header className="site-header">
-            <div className="site-header__content">
-                <Link className="site-brand" to="/" aria-label="Showcase home">
-                    <img
-                        className="site-brand__logo"
-                        src={logoUrl}
-                        alt=""
-                    />
-                    <span>ProvenanceWidgets</span>
-                    <span className="site-brand__section">Showcase</span>
-                </Link>
-                <nav className="site-navigation" aria-label="Main navigation">
-                    {navigationItems.map((item) => (
-                        <NavLink
-                            className={({ isActive }) =>
-                                `site-navigation__link${isActive ? " is-active" : ""}`
-                            }
-                            end={item.end}
-                            key={item.to}
-                            to={item.to}
-                        >
-                            {item.label}
-                        </NavLink>
-                    ))}
-                </nav>
-            </div>
-        </header>
+        <nav className="demo-grid" aria-label="Showcase demos">
+            {demos.map((demo) => (
+                <DemoCard demo={demo} key={demo.title} />
+            ))}
+        </nav>
     );
 }
