@@ -6,6 +6,7 @@ import { PrimeReactProvider } from "primereact/api/api.esm.js";
 import { ProvenanceProvider } from "provenance-widgets";
 
 import App from "./App";
+import "./styles/global.css";
 
 createRoot(document.getElementById("root")).render(
     <StrictMode>

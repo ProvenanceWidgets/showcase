@@ -18,6 +18,7 @@
     "provenance-widgets": "github:ProvenanceWidgets/ProvenanceWidgets#a1c60cd50611965ff55109f3df49793ce0b82b27",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-router-dom": "^7.18.2",
     "react-tooltip": "^5.30.0",
     "tstl": "^3.0.0"
   },
