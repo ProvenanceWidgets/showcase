@@ -11,9 +11,13 @@ import {
     Rangeslider,
     SingleSelectDropdown,
     Singleslider,
-    SuperProvenanceWidget as SuperProvenance,
     useRevertedValue,
 } from "provenance-widgets";
+
+import {
+    SuperProvenanceBoundary,
+    useSuperProvenanceEnabled,
+} from "../components/SuperProvenanceBoundary";
 
 const componentStyle = {
     width: "250px",
@@ -38,6 +42,7 @@ const provenanceComponents = [
 ];
 
 export default function PlaygroundPage() {
+    const superProvenanceEnabled = useSuperProvenanceEnabled();
     const [ingredient, setIngredient] = useState();
     const [rangeVal, setRangeVal] = useState(0);
     const [rangeVals, setRangeVals] = useState([0, 100]);
@@ -66,10 +71,10 @@ export default function PlaygroundPage() {
     return (
         <div style={{ padding: "1rem" }}>
             <h1>Showcase</h1>
-            <SuperProvenance
+            <SuperProvenanceBoundary
+                id="playground-superprovenance"
+                enabled={superProvenanceEnabled}
                 components={provenanceComponents}
-                id="superprov"
-                default
             >
                 <div style={{ padding: "1rem" }}>
                     <div
@@ -194,7 +199,7 @@ export default function PlaygroundPage() {
                         </div>
                     </div>
                 </div>
-            </SuperProvenance>
+            </SuperProvenanceBoundary>
         </div>
     );
 }

@@ -4,7 +4,7 @@ const demos = [
     {
         title: "Playground",
         image: "playground.png",
-        path: "/playground",
+        path: "/playground?superprovenance=true",
     },
     {
         title: "Scented Widgets",

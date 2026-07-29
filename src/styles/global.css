@@ -41,6 +41,68 @@ textarea {
     margin: 0 auto;
 }
 
+.demo-page-controls {
+    display: flex;
+    width: min(100% - 2rem, 1720px);
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 1rem auto 0;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid #dedede;
+}
+
+.demo-page-controls__back {
+    color: #59636a;
+    font-size: 0.95rem;
+    text-decoration: none;
+}
+
+.demo-page-controls__back:hover {
+    color: #222;
+    text-decoration: underline;
+}
+
+.demo-page-controls__toggle {
+    display: inline-flex;
+    min-height: 2.25rem;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid #aeb5ba;
+    border-radius: 0.35rem;
+    background: #f4f4f4;
+    color: #4d555a;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.demo-page-controls__toggle:hover {
+    background: #e9e9e9;
+}
+
+.demo-page-controls__toggle.is-enabled {
+    border-color: #17884d;
+    background: #17884d;
+    color: #fff;
+}
+
+.demo-page-controls__toggle.is-enabled:hover {
+    background: #127540;
+}
+
+.demo-page-controls__status {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: #8a9196;
+}
+
+.demo-page-controls__toggle.is-enabled .demo-page-controls__status {
+    background: #fff;
+}
+
 .home-page {
     padding: 2.25rem 0 3rem;
 }
@@ -187,6 +249,10 @@ a.demo-card:hover {
 
 @media (max-width: 640px) {
     .app-main {
+        width: min(100% - 1.25rem, 1720px);
+    }
+
+    .demo-page-controls {
         width: min(100% - 1.25rem, 1720px);
     }
 
