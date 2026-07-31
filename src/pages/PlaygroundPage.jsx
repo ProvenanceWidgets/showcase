@@ -1,34 +1,35 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
-    Checkbox,
     CheckboxGroup,
     InputText,
     MultiSelectDropdown,
     ProvenanceButton,
-    Radiobutton,
     RadioGroup,
     Rangeslider,
     SingleSelectDropdown,
     Singleslider,
-    useRevertedValue,
 } from "provenance-widgets";
 
-import {
-    SuperProvenanceBoundary,
-    useSuperProvenanceEnabled,
-} from "../components/SuperProvenanceBoundary";
-
-const componentStyle = {
-    width: "250px",
-    marginBottom: "0.5rem",
-};
+import { SuperProvenanceBoundary } from "../components/SuperProvenanceBoundary";
 
 const cityOptions = [
     { label: "New York", value: "New York" },
     { label: "London", value: "London" },
     { label: "Paris", value: "Paris" },
     { label: "Mumbai", value: "Mumbai" },
+];
+
+const toppingOptions = [
+    { label: "Cheese", value: "Cheese" },
+    { label: "Mushroom", value: "Mushroom" },
+    { label: "Peppers", value: "Peppers" },
+];
+
+const meatOptions = [
+    { label: "Chicken", value: "Chicken" },
+    { label: "Beef", value: "Beef" },
+    { label: "Lamb", value: "Lamb" },
 ];
 
 const provenanceComponents = [
@@ -41,163 +42,129 @@ const provenanceComponents = [
     "multi-select-dropdown",
 ];
 
+function WidgetCard({ id, title, children }) {
+    return (
+        <section className={`playground-widget ${id}`}>
+            <div className="playground-widget__heading">
+                <ProvenanceButton target={id} />
+                <h2>{title}</h2>
+            </div>
+            {children}
+        </section>
+    );
+}
+
 export default function PlaygroundPage() {
-    const superProvenanceEnabled = useSuperProvenanceEnabled();
+    const [checkboxSelection, setCheckboxSelection] = useState([]);
+    const [inputValue, setInputValue] = useState("");
     const [ingredient, setIngredient] = useState();
-    const [rangeVal, setRangeVal] = useState(0);
-    const [rangeVals, setRangeVals] = useState([0, 100]);
-    const [revertedSingleSlider] = useRevertedValue("single-slider");
-    const [revertedRangeSlider] = useRevertedValue("range-slider");
-    const [revertedRadioGroup] = useRevertedValue("radiobutton-group");
-
-    useEffect(() => {
-        if (revertedSingleSlider !== undefined) {
-            setRangeVal(revertedSingleSlider);
-        }
-    }, [revertedSingleSlider]);
-
-    useEffect(() => {
-        if (revertedRangeSlider !== undefined) {
-            setRangeVals(revertedRangeSlider);
-        }
-    }, [revertedRangeSlider]);
-
-    useEffect(() => {
-        if (revertedRadioGroup !== undefined) {
-            setIngredient(revertedRadioGroup);
-        }
-    }, [revertedRadioGroup]);
+    const [singleSliderValue, setSingleSliderValue] = useState(0);
+    const [rangeSliderValue, setRangeSliderValue] = useState([0, 100]);
+    const [city, setCity] = useState();
+    const [cities, setCities] = useState([]);
 
     return (
-        <div style={{ padding: "1rem" }}>
-            <h1>Showcase</h1>
+        <div className="playground-page">
+            <header className="playground-page__header">
+                <h1>Provenance Widgets Playground</h1>
+                <p>Seven PW1.0-compatible widgets.</p>
+            </header>
+
             <SuperProvenanceBoundary
                 id="playground-superprovenance"
-                enabled={superProvenanceEnabled}
                 components={provenanceComponents}
             >
-                <div style={{ padding: "1rem" }}>
-                    <div
-                        style={{
-                            marginTop: "0",
-                            display: "flex",
-                            flexWrap: "wrap",
-                            gap: "1rem",
-                        }}
+                <div className="playground-grid">
+                    <WidgetCard
+                        id="checkbox-group"
+                        title="Checkbox Group"
                     >
-                        <div className="checkbox-group" style={componentStyle}>
-                            <div>
-                                <p style={{ color: "gray" }}>Checkbox Group</p>
-                                <ProvenanceButton target="checkbox-group" />
-                            </div>
-                            <CheckboxGroup id="checkbox-group">
-                                <Checkbox id="checkbox" label="Chicken" />
-                                <Checkbox id="checkbox" label="Beef" />
-                                <Checkbox id="checkbox" label="Lamb" />
-                            </CheckboxGroup>
-                        </div>
-                        <div className="input-text" style={componentStyle}>
-                            <p style={{ color: "gray" }}>Input Text</p>
-                            <ProvenanceButton target="input-text" />
-                            <InputText id="input-text" placeholder="Search" />
-                        </div>
-                        <div
-                            className="radiobutton-group"
-                            style={componentStyle}
-                        >
-                            <div>
-                                <p style={{ color: "gray" }}>
-                                    Radiobutton Group
-                                </p>
-                                <ProvenanceButton target="radiobutton-group" />
-                            </div>
-                            <RadioGroup id="radiobutton-group">
-                                <Radiobutton
-                                    value="Cheese"
-                                    label="pizza"
-                                    stateItem={ingredient}
-                                    setStateItem={setIngredient}
-                                />
-                                <Radiobutton
-                                    value="Mushroom"
-                                    label="pizza"
-                                    stateItem={ingredient}
-                                    setStateItem={setIngredient}
-                                />
-                                <Radiobutton
-                                    value="Peppers"
-                                    label="pizza"
-                                    stateItem={ingredient}
-                                    setStateItem={setIngredient}
-                                />
-                            </RadioGroup>
-                        </div>
-                        <div className="single-slider" style={componentStyle}>
-                            <div>
-                                <p style={{ color: "gray" }}>Single Slider</p>
-                                <ProvenanceButton target="single-slider" />
-                            </div>
-                            <Singleslider
-                                id="single-slider"
-                                value={rangeVal}
-                                onChange={(value) => setRangeVal(value)}
-                                max={100}
-                                step={10}
-                            />
-                        </div>
-                    </div>
-                    <div
-                        style={{
-                            marginTop: "0",
-                            display: "flex",
-                            flexWrap: "wrap",
-                            gap: "1rem",
-                        }}
+                        <CheckboxGroup
+                            id="checkbox-group"
+                            data={meatOptions}
+                            optionLabel="label"
+                            optionValue="value"
+                            selected={checkboxSelection}
+                            onSelectedChange={setCheckboxSelection}
+                            dataLabel="Meat"
+                        />
+                    </WidgetCard>
+
+                    <WidgetCard id="input-text" title="Input Text">
+                        <InputText
+                            id="input-text"
+                            placeholder="Search and press Enter"
+                            value={inputValue}
+                            onChange={setInputValue}
+                            dataLabel="Search"
+                        />
+                    </WidgetCard>
+
+                    <WidgetCard
+                        id="radiobutton-group"
+                        title="Radiobutton Group"
                     >
-                        <div
-                            className="single-select-dropdown"
-                            style={componentStyle}
-                        >
-                            <div>
-                                <p style={{ color: "gray" }}>
-                                    Single Select Dropdown
-                                </p>
-                                <ProvenanceButton target="single-select-dropdown" />
-                            </div>
-                            <SingleSelectDropdown
-                                id="single-select-dropdown"
-                                options={cityOptions}
-                            />
-                        </div>
-                        <div
-                            className="multi-select-dropdown"
-                            style={componentStyle}
-                        >
-                            <div>
-                                <p style={{ color: "gray" }}>
-                                    Multi Select Dropdown
-                                </p>
-                                <ProvenanceButton target="multi-select-dropdown" />
-                            </div>
-                            <MultiSelectDropdown
-                                id="multi-select-dropdown"
-                                options={cityOptions}
-                            />
-                        </div>
-                        <div className="range-slider" style={componentStyle}>
-                            <div>
-                                <p style={{ color: "gray" }}>Range Slider</p>
-                                <ProvenanceButton target="range-slider" />
-                            </div>
-                            <Rangeslider
-                                id="range-slider"
-                                value={rangeVals}
-                                onChange={(value) => setRangeVals(value)}
-                                max={100}
-                                step={10}
-                            />
-                        </div>
-                    </div>
+                        <RadioGroup
+                            id="radiobutton-group"
+                            data={toppingOptions}
+                            optionLabel="label"
+                            optionValue="value"
+                            selected={ingredient}
+                            onSelectedChange={setIngredient}
+                            dataLabel="Pizza topping"
+                        />
+                    </WidgetCard>
+
+                    <WidgetCard
+                        id="single-slider"
+                        title="Single Slider"
+                    >
+                        <Singleslider
+                            id="single-slider"
+                            value={singleSliderValue}
+                            onChange={setSingleSliderValue}
+                            max={100}
+                            step={10}
+                            dataLabel="Single value"
+                        />
+                    </WidgetCard>
+
+                    <WidgetCard
+                        id="single-select-dropdown"
+                        title="Single Select Dropdown"
+                    >
+                        <SingleSelectDropdown
+                            id="single-select-dropdown"
+                            options={cityOptions}
+                            selected={city}
+                            onSelectedChange={setCity}
+                            dataLabel="City"
+                        />
+                    </WidgetCard>
+
+                    <WidgetCard
+                        id="multi-select-dropdown"
+                        title="Multi Select Dropdown"
+                    >
+                        <MultiSelectDropdown
+                            id="multi-select-dropdown"
+                            options={cityOptions}
+                            selected={cities}
+                            onSelectedChange={setCities}
+                            dataLabel="Cities"
+                        />
+                    </WidgetCard>
+
+                    <WidgetCard id="range-slider" title="Range Slider">
+                        <Rangeslider
+                            id="range-slider"
+                            value={rangeSliderValue}
+                            onChange={setRangeSliderValue}
+                            max={100}
+                            step={10}
+                            dataLabel="Range"
+                        />
+                    </WidgetCard>
                 </div>
             </SuperProvenanceBoundary>
         </div>

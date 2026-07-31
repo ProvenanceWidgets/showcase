@@ -15,7 +15,7 @@
     "guidance": "github:GuidanceWidgets/guidance#59668b2282a5f6cdc42d87780380a248e7e79aa5",
     "preact": "^10.29.2",
     "primereact": "^10.9.7",
-    "provenance-widgets": "github:ProvenanceWidgets/ProvenanceWidgets#a1c60cd50611965ff55109f3df49793ce0b82b27",
+    "provenance-widgets": "file:../../ProvenanceWidgets",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.18.2",
