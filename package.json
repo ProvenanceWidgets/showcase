@@ -15,12 +15,15 @@
     "guidance": "github:GuidanceWidgets/guidance#59668b2282a5f6cdc42d87780380a248e7e79aa5",
     "preact": "^10.29.2",
     "primereact": "^10.9.7",
-    "provenance-widgets": "file:../../ProvenanceWidgets",
+    "provenance-widgets": "github:LEONL0VE/ProvenanceWidgets#871d65ef1f1722d5bbc898d4d73fb3d5a0279b1d",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.18.2",
     "react-tooltip": "^5.30.0",
-    "tstl": "^3.0.0"
+    "tstl": "^3.0.0",
+    "vega": "^6.3.1",
+    "vega-embed": "^7.1.0",
+    "vega-lite": "^6.4.3"
   },
   "devDependencies": {
     "vite": "^6.0.7"

@@ -4,7 +4,6 @@ import {
     CheckboxGroup,
     InputText,
     MultiSelectDropdown,
-    ProvenanceButton,
     RadioGroup,
     Rangeslider,
     SingleSelectDropdown,
@@ -12,6 +11,7 @@ import {
 } from "provenance-widgets";
 
 import { SuperProvenanceBoundary } from "../components/SuperProvenanceBoundary";
+import WidgetCard from "../components/WidgetCard";
 
 const cityOptions = [
     { label: "New York", value: "New York" },
@@ -32,6 +32,20 @@ const meatOptions = [
     { label: "Lamb", value: "Lamb" },
 ];
 
+const singleSliderOptions = {
+    floor: 0,
+    ceil: 100,
+    showTicks: true,
+    tickStep: 5,
+};
+
+const rangeSliderOptions = {
+    floor: 0,
+    ceil: 100,
+    showTicks: true,
+    tickStep: 15,
+};
+
 const provenanceComponents = [
     "single-slider",
     "range-slider",
@@ -42,32 +56,22 @@ const provenanceComponents = [
     "multi-select-dropdown",
 ];
 
-function WidgetCard({ id, title, children }) {
-    return (
-        <section className={`playground-widget ${id}`}>
-            <div className="playground-widget__heading">
-                <ProvenanceButton target={id} />
-                <h2>{title}</h2>
-            </div>
-            {children}
-        </section>
-    );
-}
-
 export default function PlaygroundPage() {
-    const [checkboxSelection, setCheckboxSelection] = useState([]);
+    const [checkboxSelection, setCheckboxSelection] = useState([
+        "Chicken",
+        "Beef",
+    ]);
     const [inputValue, setInputValue] = useState("");
-    const [ingredient, setIngredient] = useState();
-    const [singleSliderValue, setSingleSliderValue] = useState(0);
+    const [ingredient, setIngredient] = useState("Cheese");
+    const [singleSliderValue, setSingleSliderValue] = useState(25);
     const [rangeSliderValue, setRangeSliderValue] = useState([0, 100]);
-    const [city, setCity] = useState();
-    const [cities, setCities] = useState([]);
+    const [city, setCity] = useState(cityOptions[0]);
+    const [cities, setCities] = useState(cityOptions.slice(0, 2));
 
     return (
         <div className="playground-page">
             <header className="playground-page__header">
                 <h1>Provenance Widgets Playground</h1>
-                <p>Seven PW1.0-compatible widgets.</p>
             </header>
 
             <SuperProvenanceBoundary
@@ -123,8 +127,7 @@ export default function PlaygroundPage() {
                             id="single-slider"
                             value={singleSliderValue}
                             onChange={setSingleSliderValue}
-                            max={100}
-                            step={10}
+                            options={singleSliderOptions}
                             dataLabel="Single value"
                         />
                     </WidgetCard>
@@ -136,8 +139,12 @@ export default function PlaygroundPage() {
                         <SingleSelectDropdown
                             id="single-select-dropdown"
                             options={cityOptions}
+                            optionLabel="label"
+                            dataKey="value"
                             selected={city}
                             onSelectedChange={setCity}
+                            filter
+                            showClear
                             dataLabel="City"
                         />
                     </WidgetCard>
@@ -149,8 +156,12 @@ export default function PlaygroundPage() {
                         <MultiSelectDropdown
                             id="multi-select-dropdown"
                             options={cityOptions}
+                            optionLabel="label"
+                            dataKey="value"
                             selected={cities}
                             onSelectedChange={setCities}
+                            filter
+                            showClear
                             dataLabel="Cities"
                         />
                     </WidgetCard>
@@ -160,8 +171,7 @@ export default function PlaygroundPage() {
                             id="range-slider"
                             value={rangeSliderValue}
                             onChange={setRangeSliderValue}
-                            max={100}
-                            step={10}
+                            options={rangeSliderOptions}
                             dataLabel="Range"
                         />
                     </WidgetCard>

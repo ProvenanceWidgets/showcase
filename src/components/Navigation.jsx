@@ -9,30 +9,37 @@ const demos = [
     {
         title: "Scented Widgets",
         image: "scented-widgets.png",
+        path: "/scented-widgets",
     },
     {
         title: "Phosphor Objects",
         image: "phosphor-objects.png",
+        path: "/phosphor-objects",
     },
     {
         title: "Data Distribution",
         image: "data-distribution.png",
+        path: "/data-distribution",
     },
     {
         title: "Vega Integration",
         image: "vega-example.png",
+        path: "/vega-example",
     },
     {
         title: "Dynamic Query Widgets",
         image: "dynamic-query-widgets-homefinder.png",
+        path: "/dynamic-query-widgets-homefinder",
     },
     {
         title: "Widgets to Visualization one-way",
         image: "widgets-to-vis-one-way.png",
+        path: "/widgets-to-vis-one-way",
     },
     {
         title: "Visualization to Widgets one-way",
         image: "vis-to-widgets-one-way.png",
+        path: "/vis-to-widgets-one-way",
     },
 ];
 

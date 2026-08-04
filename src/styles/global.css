@@ -116,9 +116,231 @@ textarea {
     font-weight: 500;
 }
 
+.legacy-gallery-page,
+.case-study-page {
+    padding: 1.5rem 0 4rem;
+}
+
+.legacy-gallery-page > header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.legacy-gallery-page > header h1,
+.case-study-page > h1 {
+    margin: 0;
+    color: #30363a;
+    font-size: 1.35rem;
+    font-weight: 500;
+}
+
+.legacy-gallery-page > header p {
+    max-width: 760px;
+    margin: 0.65rem auto 0;
+    color: #697279;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.legacy-widget-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2.25rem 2rem;
+}
+
+.legacy-widget-grid .playground-widget {
+    padding: 0.35rem 0.5rem 0.75rem;
+}
+
+.legacy-widget-grid .playground-widget__heading {
+    margin-bottom: 0.85rem;
+}
+
+.case-study-page > h1 {
+    margin-bottom: 2.2rem;
+    text-align: center;
+}
+
+.case-study-layout {
+    display: grid;
+    grid-template-columns: minmax(260px, 1fr) minmax(0, 3fr);
+    gap: 2.25rem;
+}
+
+.case-study-panel,
+.case-study-visualization {
+    min-width: 0;
+}
+
+.case-study-panel > h2,
+.case-study-visualization > h2 {
+    margin: 0;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid #d8dcdf;
+    color: #31383d;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.case-study-panel__content {
+    padding: 0.9rem 0.45rem;
+}
+
+.case-study-visualization__canvas {
+    min-height: 500px;
+    padding: 0.75rem;
+}
+
+.case-control {
+    padding: 0.3rem 0 1.35rem;
+    border-bottom: 1px solid #e1e4e6;
+    margin-bottom: 1.25rem;
+}
+
+.case-control > label {
+    display: block;
+    margin-bottom: 0.65rem;
+    color: #30363a;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.case-control__body {
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    align-items: start;
+    gap: 0.55rem;
+}
+
+.case-control__footprint > div {
+    margin-top: 0 !important;
+}
+
+.case-control__widget {
+    min-width: 0;
+}
+
+.case-control__widget > div {
+    margin-top: 0 !important;
+}
+
+.showcase-chart-container {
+    position: relative;
+    width: 100%;
+}
+
+.showcase-chart {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.showcase-chart-tooltip {
+    position: absolute;
+    z-index: 20;
+    min-width: 150px;
+    padding: 0.8rem 1rem;
+    border: 1px solid #d5d9dc;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 3px 10px rgba(32, 39, 44, 0.2);
+    color: #1f2529;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 80ms ease;
+}
+
+.showcase-chart-tooltip.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.showcase-chart-tooltip__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.75rem;
+}
+
+.showcase-chart-tooltip__row + .showcase-chart-tooltip__row {
+    margin-top: 0.35rem;
+}
+
+.showcase-chart-tooltip__label {
+    color: #747b80;
+}
+
+.showcase-chart-tooltip__value {
+    color: #171b1e;
+    font-variant-numeric: tabular-nums;
+}
+
+.chart-grid line {
+    stroke: #e4e7e9;
+}
+
+.chart-grid path {
+    display: none;
+}
+
+.chart-axis path,
+.chart-axis line {
+    stroke: #737d83;
+}
+
+.chart-axis text {
+    fill: #4d565c;
+    font-size: 12px;
+}
+
+.chart-axis-label {
+    fill: #30373c;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.chart-brush .selection {
+    fill: #8ea6c0;
+    fill-opacity: 0.2;
+    stroke: #566f89;
+    stroke-width: 1.5;
+}
+
+.visualization-status {
+    display: grid;
+    min-height: 480px;
+    place-items: center;
+    color: #68737a;
+    text-align: center;
+}
+
+.brush-hint {
+    margin: 0.5rem 0;
+    padding: 0.8rem;
+    border-left: 3px solid #47a9c1;
+    background: #f1f8fa;
+    color: #536067;
+    font-size: 0.85rem;
+    line-height: 1.45;
+}
+
 @media (max-width: 1100px) {
     .playground-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .legacy-widget-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .case-study-layout {
+        grid-template-columns: minmax(230px, 1fr) minmax(0, 2fr);
+        gap: 1.25rem;
     }
 }
 
@@ -269,6 +491,16 @@ a.demo-card:hover {
 
     .playground-grid {
         grid-template-columns: 1fr;
+    }
+
+    .legacy-widget-grid,
+    .case-study-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .case-study-visualization__canvas {
+        min-height: 320px;
+        padding: 0.25rem 0;
     }
 
     .demo-page-controls {
