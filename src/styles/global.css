@@ -156,6 +156,39 @@ textarea {
     margin-bottom: 0.85rem;
 }
 
+/*
+ * Keep slider history points on the same x scale as the draggable handles.
+ *
+ * The temporal chart reserves 57px on the left for its padding/y-axis and
+ * 21px on the right for padding/endpoint clearance. Its 1px border on either
+ * side brings the non-plot width to 80px. If its panel remains the same width
+ * as the slider, equal values no longer share an x coordinate. PW1.0 made the
+ * overlay wider than the track so those gutters lived outside the slider's
+ * plotting span.
+ */
+:is(.playground-widget, .case-control__widget)
+    > div[data-label]:has([data-provenance-slider-ticks])
+    > div:has(> [data-provenance-chart-target]) {
+    left: -58px !important;
+    width: calc(100% + 80px) !important;
+}
+
+/* A native vertical scrollbar consumes 15px of the point plot on Windows.
+ * Keep wheel/touch scrolling available for long histories, but do not let
+ * the scrollbar change the horizontal value scale. */
+:is(.playground-widget, .case-control__widget)
+    > div[data-label]:has([data-provenance-slider-ticks])
+    [data-provenance-chart-target] * {
+    scrollbar-width: none;
+}
+
+:is(.playground-widget, .case-control__widget)
+    > div[data-label]:has([data-provenance-slider-ticks])
+    [data-provenance-chart-target] *::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
 .case-study-page > h1 {
     margin-bottom: 2.2rem;
     text-align: center;
