@@ -1,5 +1,7 @@
 import { ProvenanceButton } from "provenance-widgets";
 
+import { keepOpenProvenanceView } from "./provenanceViewInteraction";
+
 export function CaseStudyLayout({ title, controls, visualization }) {
     return (
         <section className="case-study-page">
@@ -24,7 +26,10 @@ export function CaseStudyLayout({ title, controls, visualization }) {
 
 export function ControlWidget({ id, label, children }) {
     return (
-        <div className="case-control">
+        <div
+            className="case-control"
+            onMouseDown={keepOpenProvenanceView}
+        >
             <label>{label}</label>
             <div className="case-control__body">
                 <div className="case-control__footprint">
