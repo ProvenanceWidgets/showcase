@@ -111,6 +111,13 @@ const patchBundle = source => {
         1,
         "PW1 Input Text orange scent colors",
     );
+    patched = replaceWhenPresent(
+        patched,
+        /(position: "relative",\s*zIndex: 1,\s*pointerEvents: "none")(\s*\},\s*children: value === "" \? "<empty>" : value)/g,
+        '$1,\n                          color: getContrastColor(color2)$2',
+        1,
+        "Input Text black-white contrast label",
+    );
 
     if (
         !patched.includes(
