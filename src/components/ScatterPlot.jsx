@@ -145,8 +145,6 @@ export default function ScatterPlot({
             .domain(colorValues)
             .range(["#e76f51", "#2a9d8f", "#4c78a8", "#f2c14e"]);
 
-        let brushFrame = null;
-        let pendingBrushRanges = null;
         const getBrushRanges = selection => {
             const [[x0, y0], [x1, y1]] = selection;
             return [
@@ -159,27 +157,9 @@ export default function ScatterPlot({
             const brushBehavior = d3
                 .brush()
                 .extent([[0, 0], [plotWidth, plotHeight]])
-                .on("brush", event => {
-                    if (!event.selection || !onBrushChange) return;
-                    pendingBrushRanges = getBrushRanges(event.selection);
-                    if (brushFrame !== null) return;
-                    brushFrame = window.requestAnimationFrame(() => {
-                        brushFrame = null;
-                        if (!pendingBrushRanges) return;
-                        onBrushChange(
-                            pendingBrushRanges[0],
-                            pendingBrushRanges[1],
-                        );
-                    });
-                })
                 .on("end", event => {
                     if (!event.selection) return;
                     const ranges = getBrushRanges(event.selection);
-                    pendingBrushRanges = ranges;
-                    if (brushFrame !== null) {
-                        window.cancelAnimationFrame(brushFrame);
-                        brushFrame = null;
-                    }
                     onBrushChange?.(ranges[0], ranges[1]);
                     onBrushSelection?.(
                         ranges[0],
@@ -325,11 +305,7 @@ export default function ScatterPlot({
                 .text(d => d);
         }
 
-        return () => {
-            if (brushFrame !== null) {
-                window.cancelAnimationFrame(brushFrame);
-            }
-        };
+        return undefined;
     }, [
         data,
         xField,
