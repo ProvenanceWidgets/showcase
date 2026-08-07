@@ -196,7 +196,8 @@ textarea {
 
 .case-study-layout {
     display: grid;
-    grid-template-columns: minmax(260px, 1fr) minmax(0, 3fr);
+    /* PW1.0 keeps the control rail at about one fifth of the content width. */
+    grid-template-columns: minmax(180px, 1fr) minmax(0, 4fr);
     gap: 2.25rem;
 }
 
@@ -372,7 +373,7 @@ textarea {
     }
 
     .case-study-layout {
-        grid-template-columns: minmax(230px, 1fr) minmax(0, 2fr);
+        grid-template-columns: minmax(180px, 1fr) minmax(0, 4fr);
         gap: 1.25rem;
     }
 }
