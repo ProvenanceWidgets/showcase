@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
+    "patch:provenance": "node scripts/patch-provenance-temporal-view.mjs",
+    "prestart": "npm run patch:provenance",
+    "start": "vite --force",
+    "prebuild": "npm run patch:provenance",
     "build": "vite build",
+    "pretest": "npm run patch:provenance",
     "test": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "node scripts/patch-provenance-temporal-view.mjs"
   },
   "dependencies": {
     "@mantine/core": "^8.3.7",
