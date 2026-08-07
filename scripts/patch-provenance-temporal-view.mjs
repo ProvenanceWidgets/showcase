@@ -55,23 +55,16 @@ const patchBundle = source => {
     patched = replaceWhenPresent(
         patched,
         /stroke: color2,\s*strokeWidth: "2"/g,
-        'stroke: "#495057",\n                        strokeWidth: "2"',
+        'stroke: "#495057",\n                        strokeWidth: "1"',
         2,
         "PW1 temporal connection lines",
     );
     patched = replaceWhenPresent(
         patched,
-        /stroke: "#495057",\s*strokeWidth: "1"/g,
-        'stroke: "#495057",\n                        strokeWidth: "2"',
-        2,
-        "PW1 temporal connection thickness",
-    );
-    patched = replaceWhenPresent(
-        patched,
-        /stroke: TEMPORAL_SLIDER_LINE_COLOR,\s*strokeWidth: "1"/g,
-        'stroke: TEMPORAL_SLIDER_LINE_COLOR,\n                        strokeWidth: "2"',
-        2,
-        "PW1 named temporal connection thickness",
+        /stroke: (PW1_TEMPORAL_LINE_COLOR|TEMPORAL_SLIDER_LINE_COLOR),\s*strokeWidth: "2"/g,
+        'stroke: $1,\n                    strokeWidth: "1"',
+        1,
+        "PW1 one-pixel temporal connections",
     );
     patched = replaceWhenPresent(
         patched,
@@ -86,6 +79,30 @@ const patchBundle = source => {
         '$1height: "16px",$2',
         1,
         "fixed temporal point row",
+    );
+    patched = replaceWhenPresent(
+        patched,
+        /style: \{ position: "absolute", top: 0, left: "6px", width: "calc\(100% - 12px\)", height: `\$\{temporalPlotHeight\}px`, pointerEvents: "none", zIndex: 1 \}/g,
+        'style: { position: "absolute", top: 0, left: "6px", ' +
+            'width: "calc(100% - 12px)", ' +
+            'height: `${temporalPlotHeight}px`, overflow: "visible", ' +
+            'pointerEvents: "none", zIndex: 0 }',
+        1,
+        "unclipped temporal endpoint line",
+    );
+    patched = replaceWhenPresent(
+        patched,
+        /(top: `\$\{temporalYPositions\[index\] - 8\}px`,\s*left: 0,\s*right: 0)(\s*\}, children:)/g,
+        "$1,\n                zIndex: 1$2",
+        1,
+        "temporal points above connection lines",
+    );
+    patched = replaceWhenPresent(
+        patched,
+        /(backgroundColor: color2,\s*)border: `1px solid \$\{color\(color2\)\.darker\(\)\}`,(\s*pointerEvents: "none")/g,
+        '$1border: "1px solid #495057",$2',
+        2,
+        "PW1 temporal point outlines",
     );
 
     if (
