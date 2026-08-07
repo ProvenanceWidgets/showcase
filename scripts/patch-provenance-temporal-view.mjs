@@ -104,6 +104,13 @@ const patchBundle = source => {
         2,
         "PW1 temporal point outlines",
     );
+    patched = replaceWhenPresent(
+        patched,
+        /getScentColor\(\s*value,\s*strategy,\s*(Oranges_default|interpolateOranges),\s*provenanceMode === "time" \? "time" : "index"\s*\)/g,
+        "getScentColor(value, strategy, $1)",
+        1,
+        "PW1 Input Text orange scent colors",
+    );
 
     if (
         !patched.includes(
