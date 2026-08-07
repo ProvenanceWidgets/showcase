@@ -118,6 +118,24 @@ const patchBundle = source => {
         1,
         "Input Text black-white contrast label",
     );
+    patched = replaceWhenPresent(
+        patched,
+        /style: \{\s*width: "100%",\s*\.\.\.props\.inputProps\?\.style\s*\}/g,
+        'style: { width: "100%", backgroundColor: "#fff", ' +
+            'borderColor: "#ced4da", ' +
+            'boxShadow: "0 0 0 1000px #fff inset", ' +
+            'outline: "none", ...props.inputProps?.style }',
+        1,
+        "neutral Input Text background",
+    );
+    patched = replaceWhenPresent(
+        patched,
+        /("aria-label": props\["aria-label"\] \?\? tooltipLabel,\s*)placeholder,/g,
+        '$1autoComplete: props.inputProps?.autoComplete ?? "off",\n' +
+            '              placeholder,',
+        1,
+        "disable Input Text browser autofill",
+    );
 
     if (
         !patched.includes(
