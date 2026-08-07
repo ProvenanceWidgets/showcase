@@ -41,6 +41,30 @@ const patchBundle = source => {
     );
     patched = replaceWhenPresent(
         patched,
+        /const inputTextPlotHeight = Math\.max\(\s*48,\s*inputTextEntries\.length \* 32\s*\);/g,
+        "const inputTextPlotHeight = 440;",
+        1,
+        "expanded PW1 Input Text temporal height",
+    );
+    patched = replaceWhenPresent(
+        patched,
+        /const inputTextYPositions = getTemporalYPositions\(\s*inputTextEntries,\s*chartData\.mode \?\? mode,\s*inputTextPlotHeight\s*\);/g,
+        "const inputTextYPositions = getTemporalYPositions(\n" +
+            '          inputTextEntries, "interaction", inputTextPlotHeight\n' +
+            "        );",
+        1,
+        "PW1 Input Text interaction axis",
+    );
+    patched = replaceWhenPresent(
+        patched,
+        /display: "flex",\s*alignItems: "stretch",\s*maxHeight: "300px",\s*overflowY: "auto"/g,
+        'display: "flex", alignItems: "stretch", ' +
+            'height: `${inputTextPlotHeight}px`, overflow: "visible"',
+        1,
+        "non-scrolling Input Text temporal panel",
+    );
+    patched = replaceWhenPresent(
+        patched,
         /style: \{ display: "flex", flexDirection: "column", gap: "8px", maxHeight: "300px", overflowY: "auto", flexGrow: 1, position: "relative" \}, children: chartData\.isRangeSlider \|\| chartData\.isSingleSlider \?/g,
         "style: { display: \"flex\", flexDirection: \"column\", " +
             "gap: \"8px\", maxHeight: chartData.isRangeSlider || " +
