@@ -88,6 +88,142 @@ const patchBundle = source => {
         "fixed temporal point row",
     );
 
+    if (
+        !patched.includes(
+            "${safePanelClass} .p-multiselect-item.p-highlight",
+        )
+    ) {
+        patched = replaceExpected(
+            patched,
+            /(\.\$\{safePanelClass\} \.p-multiselect-item > span \{\s*flex-grow: 1;\s*min-width: 0;\s*\})/g,
+            "$1\n" +
+                "                .${safePanelClass} " +
+                ".p-multiselect-item.p-highlight,\n" +
+                "                .${safePanelClass} " +
+                ".p-multiselect-item.p-focus {\n" +
+                "                    background: transparent !important;\n" +
+                "                }",
+            1,
+            "Multi Select option selection background",
+        );
+    }
+    if (
+        !patched.includes(
+            "${safePanelClass} .p-dropdown-item.p-highlight",
+        )
+    ) {
+        patched = replaceExpected(
+            patched,
+            /(\.\$\{safePanelClass\} \.p-dropdown-item > span \{\s*flex-grow: 1;\s*min-width: 0;\s*\})/g,
+            "$1\n" +
+                "                .${safePanelClass} " +
+                ".p-dropdown-item.p-highlight,\n" +
+                "                .${safePanelClass} " +
+                ".p-dropdown-item.p-focus {\n" +
+                "                    background: transparent !important;\n" +
+                "                }",
+            1,
+            "Single Select option selection background",
+        );
+    }
+
+    if (
+        !patched.includes(
+            ".provenance-multiselect-panel-${safeTarget}",
+        )
+    ) {
+        patched = replaceExpected(
+            patched,
+            /const chart = eventTarget\?\.closest\?\.\(\s*"\[data-provenance-chart-target\]"\s*\);\s*return chart\?\.getAttribute\?\.\("data-provenance-chart-target"\) === target;/g,
+            "const interaction = eventTarget?.closest?.(\n" +
+                '    "[data-provenance-chart-target], " +\n' +
+                '    "[data-widget-id], [data-provenance-widget]"\n' +
+                ");\n" +
+                "  if (\n" +
+                "    interaction?.getAttribute?.(\n" +
+                '      "data-provenance-chart-target"\n' +
+                "    ) === target ||\n" +
+                "    interaction?.getAttribute?.(" +
+                '"data-widget-id") === target ||\n' +
+                "    interaction?.getAttribute?.(" +
+                '"id") === target\n' +
+                "  ) {\n" +
+                "    return true;\n" +
+                "  }\n" +
+                "  const safeTarget = String(target ?? \"\").replace(" +
+                "/[^a-zA-Z0-9_-]/g, \"-\");\n" +
+                "  const dropdownPanel = eventTarget?.closest?.(\n" +
+                "    `.provenance-dropdown-panel-${safeTarget}, ` +\n" +
+                "    `.provenance-multiselect-panel-${safeTarget}`\n" +
+                "  );\n" +
+                "  return Boolean(dropdownPanel);",
+            1,
+            "open footprint interaction boundary",
+        );
+        patched = replaceExpected(
+            patched,
+            /("aria-label": groupProps\["aria-label"\] \?\? tooltipLabel,\s*)("data-provenance-widget": "checkbox-group")/g,
+            '$1"data-widget-id": id2,\n      $2',
+            1,
+            "Checkbox Group interaction target",
+        );
+        patched = replaceExpected(
+            patched,
+            /("aria-label": groupProps\["aria-label"\] \?\? tooltipLabel,\s*)("data-provenance-widget": "radio-group")/g,
+            '$1"data-widget-id": id2,\n      $2',
+            1,
+            "Radio Group interaction target",
+        );
+        patched = replaceExpected(
+            patched,
+            /(ref: setContainerRef,\s*"data-label": tooltipLabel,)(\s*style:)/g,
+            '$1\n      "data-widget-id": props.id,$2',
+            2,
+            "slider interaction targets",
+        );
+        patched = replaceExpected(
+            patched,
+            /const dropdownRef = ((?:useRef\d*|\(0, import_react\d+\.useRef\)))\(null\);\s*(const propsRef = \1\(props\);)/g,
+            "const dropdownRef = $1(null);\n" +
+                "  const reopenAfterSelectionRef = $1(false);\n" +
+                "  $2",
+            2,
+            "dropdown selection reopen refs",
+        );
+        patched = replaceExpected(
+            patched,
+            /(if \(open\) \{\s*dropdownRef\.current\?\.show\?\.\(\);\s*\} else \{\s*)(dropdownRef\.current\?\.hide\?\.\(\);)/g,
+            "$1reopenAfterSelectionRef.current = false;\n        $2",
+            2,
+            "dropdown close reset",
+        );
+        patched = replaceExpected(
+            patched,
+            /(const handleChange = \(event\) => \{\s*)(const nextSelection = resolveSingleSelectOption\()/g,
+            "$1if (showTimeline) {\n" +
+                "      reopenAfterSelectionRef.current = true;\n" +
+                "    }\n" +
+                "    $2",
+            1,
+            "Single Select keep-open selection",
+        );
+        patched = replaceExpected(
+            patched,
+            /(dropdownProps\.onHide\?\.\(event\);\s*)(if \(showTimeline\) \{)/g,
+            "$1if (showTimeline && " +
+                "reopenAfterSelectionRef.current) {\n" +
+                "                reopenAfterSelectionRef.current = false;\n" +
+                "                setTimeout(() => " +
+                "dropdownRef.current?.show?.(), 0);\n" +
+                "                return;\n" +
+                "              }\n" +
+                "              reopenAfterSelectionRef.current = false;\n" +
+                "              $2",
+            1,
+            "Single Select panel persistence",
+        );
+    }
+
     const liveSingleSliderCallback =
         /emittedValueRef\.current = nextValue;\s*setDisplayValue\(nextValue\);\s*callValueCallbacks\(propsRef\.current, nextValue, event\);(\s*\};\s*const handleSlideEnd)/g;
     if (liveSingleSliderCallback.test(patched)) {
