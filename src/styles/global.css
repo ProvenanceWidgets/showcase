@@ -240,6 +240,17 @@ textarea {
 }
 
 /*
+ * Keep slider tracks the same length in every showcase layout. The widget
+ * grids otherwise stretch them to a card width while case-study controls
+ * shrink them to the remaining width beside the footprint button.
+ */
+:is(.playground-widget, .case-control__widget)
+    > div[data-label]:has([data-provenance-slider-ticks]) {
+    width: min(100%, 15.5rem) !important;
+    max-width: 15.5rem;
+}
+
+/*
  * Keep slider history points on the same x scale as the draggable handles.
  *
  * The temporal chart reserves 57px on the left for its padding/y-axis and
@@ -280,7 +291,7 @@ textarea {
 .case-study-layout {
     display: grid;
     /* PW1.0 keeps the control rail at about one fifth of the content width. */
-    grid-template-columns: minmax(180px, 1fr) minmax(0, 4fr);
+    grid-template-columns: minmax(19.25rem, 1fr) minmax(0, 4fr);
     gap: 2.25rem;
 }
 
@@ -456,7 +467,7 @@ textarea {
     }
 
     .case-study-layout {
-        grid-template-columns: minmax(180px, 1fr) minmax(0, 4fr);
+        grid-template-columns: minmax(19.25rem, 1fr) minmax(0, 4fr);
         gap: 1.25rem;
     }
 }
