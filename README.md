@@ -1,25 +1,25 @@
-# ProvenanceWidgets Showcase
-A Showcase of Applications Developed using ProvenanceWidgets.
+# Super Widgets (SW) Showcase
+A Showcase of Applications Developed using Super Widgets (the V2 generation of ProvenanceWidgets).
 
 ## Setup
 - Open the command line/terminal on your machine and navigate to this project's top-level directory (i.e. where this file is).
-- Download and install node, npm from https://nodejs.org/en/download/. Optionally, use the <a href="https://github.com/nvm-sh/nvm" target="_blank">nvm (Node Version Manager)</a> to quickly install and use different versions of node via the command line. Note the compatible node/npm version in package.json > "engines".
-- Install compatible Angular `npm install -g @angular/cli@15.2.9`
-- `npm install` - installs required libraries from package.json. 
+- Download and install node, npm from https://nodejs.org/en/download/. Optionally, use the <a href="https://github.com/nvm-sh/nvm" target="_blank">nvm (Node Version Manager)</a> to quickly install and use different versions of node via the command line. Note the node version used by the CI workflow (`.github/workflows/build.yaml`), which builds with Node 22.x. Vite 6 requires Node 18 or newer.
+- `npm install` - installs required libraries from package.json.
 
 ## Run
 - `npm run start`
-- Open the browser (preferably Chrome) at [http://localhost:4200](http://localhost:4200).
+- Open the browser at [http://localhost:5173/showcase](http://localhost:5173/showcase).
 
 ## Test
-- `npm run test`
+- `npm run test` .
 
 ## Build
 - `npm run build` outputs the build in the `./dist/` folder.
 
 ## Deployment
-- GitHub Actions is setup via the `.github/workflows/build.yaml` file. Built files are pushed to `gh-pages` branch and served via GitHub Pages at [https://provenancewidgets.github.io/showcase](https://provenancewidgets.github.io/showcase).
+- GitHub Actions is setup via the `.github/workflows/build.yaml` file. On push to `main`, the built files are pushed to the `gh-pages` branch and served via GitHub Pages at [https://provenancewidgets.github.io/showcase](https://provenancewidgets.github.io/showcase).
 
 ## Development vs. Building Configurations for base-href
-- Development: Because the app served from `/` while developing locally, index.html must be configured with `<base href="/" />` and `src/app/applications/home/component.ts` must have the `url` set to `${window.location.origin}/#/${route};`.
-- Build: Because the app is eventually served from `/showcase` (and not `/`), index.html must be configured with `<base href="/showcase/" />` and `src/app/applications/home/component.ts` must have the `url` set to `${window.location.origin}/showcase/#/${route};`. In addition, we pass `--base-href /showcase/` in the `ng build` command (already configured to do this as part of `npm run build`, see package.json).
+- Both development and build use the single `base: '/showcase/'` option in `vite.config.js` — no per-environment change is needed (unlike the Angular-based PW1.0 showcase, which required a different `<base href>` per environment).
+- Development: Vite serves the app at [http://localhost:5173/showcase/](http://localhost:5173/showcase/) (visiting `/` redirects to `/showcase/`). Routing is hash-based (`HashRouter`), so a demo URL looks like `http://localhost:5173/showcase/#/playground`.
+- Build: `vite build` emits all assets with `/showcase/`-prefixed paths (visible in `dist/index.html`), and the app is served from `https://provenancewidgets.github.io/showcase/`, e.g. `https://provenancewidgets.github.io/showcase/#/playground`.
