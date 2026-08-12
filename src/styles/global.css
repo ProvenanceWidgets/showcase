@@ -74,6 +74,14 @@ textarea {
     font-weight: 500;
 }
 
+.site-header__current {
+    padding-left: 0.65rem;
+    border-left: 1px solid #cfd6d2;
+    color: #717a75;
+    font-weight: 500;
+}
+
+
 .site-header__actions {
     display: flex;
     align-items: center;
@@ -164,16 +172,41 @@ textarea {
     font-weight: 500;
 }
 
-.playground-page__header p {
-    margin: 0.5rem 0 0;
-    color: #606970;
+.playground-page__title-divider {
+    width: min(30rem, 80%);
+    margin: 0.65rem auto 0;
+    border-top: 1px solid #d9dedd;
+}
+
+.playground-page__subtitle {
+    margin: 0.55rem 0 0;
+    color: #747d79;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+}
+
+.playground-page > div:has(> .playground-grid) > div:first-child {
+    width: 100%;
+    justify-content: center;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #e2e6e4;
+}
+
+
+.playground-page
+    > div:has(> .playground-grid)
+    > div:first-child
+    > div:last-child {
+    background-color: #eef1f0 !important;
 }
 
 .playground-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1.75rem;
-    margin-top: 1.25rem;
+    column-gap: clamp(3rem, 4vw, 4.5rem);
+    row-gap: 4rem;
+    margin-top: 3rem;
 }
 
 .playground-widget {
@@ -239,27 +272,19 @@ textarea {
     margin-bottom: 0.85rem;
 }
 
-/*
- * Keep slider tracks the same length in every showcase layout. The widget
- * grids otherwise stretch them to a card width while case-study controls
- * shrink them to the remaining width beside the footprint button.
- */
 :is(.playground-widget, .case-control__widget)
     > div[data-label]:has([data-provenance-slider-ticks]) {
     width: min(100%, 15.5rem) !important;
     max-width: 15.5rem;
 }
 
-/*
- * Keep slider history points on the same x scale as the draggable handles.
- *
- * The temporal chart reserves 57px on the left for its padding/y-axis and
- * 21px on the right for padding/endpoint clearance. Its 1px border on either
- * side brings the non-plot width to 80px. If its panel remains the same width
- * as the slider, equal values no longer share an x coordinate. PW1.0 made the
- * overlay wider than the track so those gutters lived outside the slider's
- * plotting span.
- */
+:is(.playground-widget, .case-control__widget)
+    > div[data-label]
+    [data-provenance-slider-ticks]
+    > span:not(:empty) {
+    transform: translateX(-50%) !important;
+}
+
 :is(.playground-widget, .case-control__widget)
     > div[data-label]:has([data-provenance-slider-ticks])
     > div:has(> [data-provenance-chart-target]) {
@@ -267,9 +292,41 @@ textarea {
     width: calc(100% + 80px) !important;
 }
 
-/* A native vertical scrollbar consumes 15px of the point plot on Windows.
- * Keep wheel/touch scrolling available for long histories, but do not let
- * the scrollbar change the horizontal value scale. */
+:is(.playground-widget, .case-control__widget)
+    > div[data-label]:has([data-provenance-slider-ticks])
+    > div:has(> [data-provenance-chart-target]):has(
+        [data-provenance-temporal-brush]
+    ) {
+    left: -86px !important;
+    width: calc(100% + 108px) !important;
+}
+
+:is(.playground-widget, .case-control__widget)
+    > div[data-label]:has([data-provenance-slider-ticks])
+    > div:has([data-provenance-temporal-brush])
+    :is([data-timeline-axis], [data-timeline-axis] + div) {
+    width: calc(100% - 76px) !important;
+    margin-left: 70px !important;
+}
+
+:is(.playground-widget, .case-control__widget)
+    > div[data-label]:has([data-provenance-slider-ticks])
+    > div:has(> [data-provenance-chart-target])
+    [data-timeline-axis]
+    + div
+    > span:first-child {
+    transform: translateX(-50%);
+}
+
+:is(.playground-widget, .case-control__widget)
+    > div[data-label]:has([data-provenance-slider-ticks])
+    > div:has(> [data-provenance-chart-target])
+    [data-timeline-axis]
+    + div
+    > span:last-child {
+    transform: translateX(50%);
+}
+
 :is(.playground-widget, .case-control__widget)
     > div[data-label]:has([data-provenance-slider-ticks])
     [data-provenance-chart-target] * {
@@ -584,6 +641,7 @@ a.demo-card:hover {
 
     .playground-grid {
         grid-template-columns: 1fr;
+        row-gap: 3rem;
     }
 
     .legacy-widget-grid,

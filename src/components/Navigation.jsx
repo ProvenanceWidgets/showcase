@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const demos = [
+export const demos = [
     {
         title: "Playground",
         image: "playground.png",

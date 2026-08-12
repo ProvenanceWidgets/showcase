@@ -71,8 +71,13 @@ export default function PlaygroundPage() {
     return (
         <div className="playground-page">
             <header className="playground-page__header">
-                <h1>Provenance Widgets Playground</h1>
+                <h1>Playground</h1>
+                <div
+                    className="playground-page__title-divider"
+                    aria-hidden="true"
+                />
             </header>
+                <p className="playground-page__subtitle" style={{ textAlign: "center" }}>SuperWidget</p>
 
             <SuperProvenanceBoundary
                 id="playground-superprovenance"

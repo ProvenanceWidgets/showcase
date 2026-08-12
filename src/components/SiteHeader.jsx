@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { demos } from "./Navigation";   
 
 const githubUrl = "https://github.com/ProvenanceWidgets/showcase";
 const websiteUrl = "https://provenancewidgets.github.io";
 
 export default function SiteHeader() {
+    const location = useLocation();
+    const current = demos.find((d) => d.path === location.pathname);
     const logoUrl =
         `${import.meta.env.BASE_URL}assets/images/logo-dark.png`;
 
@@ -14,6 +17,14 @@ export default function SiteHeader() {
                     <img src={logoUrl} alt="" />
                     <span className="site-header__name">ProvenanceWidgets</span>
                     <span className="site-header__section">Showcase</span>
+                    {current && (
+    <>
+        <span className="site-header__current">{current.title}</span>
+    </>
+)}
+
+                    
+
                 </Link>
                 <nav className="site-header__actions" aria-label="External links">
                     <a
