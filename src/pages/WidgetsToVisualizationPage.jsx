@@ -24,8 +24,6 @@ const lifeExpectancySliderOptions = {
     ticksArray: [40, 80],
 };
 
-// PW 1.0 keeps this filter active even though its Fertility range control is
-// commented out in the template.
 const fertilityRange = [2, 8];
 
 export default function WidgetsToVisualizationPage() {

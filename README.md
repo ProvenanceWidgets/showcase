@@ -1,5 +1,5 @@
-# Super Widgets (SW) Showcase
-A Showcase of Applications Developed using Super Widgets (the V2 generation of ProvenanceWidgets).
+# SuperProvenanceWidgets (SW) Showcase
+A showcase of applications developed using SuperProvenanceWidgets, the second generation of ProvenanceWidgets.
 
 ## Setup
 - Open the command line/terminal on your machine and navigate to this project's top-level directory (i.e. where this file is).

@@ -13,7 +13,6 @@ export default function VegaEmbedChart({
     const signalsRef = useRef(signals);
     signalsRef.current = signals;
 
-    // 1. Embed the Vega chart instance once when spec/dataUrls change
     useEffect(() => {
         let active = true;
         const preparedSpec = structuredClone(spec);
@@ -55,7 +54,6 @@ export default function VegaEmbedChart({
         };
     }, [spec, dataUrls, onView]);
 
-    // 2. Update signals in-place without re-creating the entire Vega chart
     useEffect(() => {
         const view = viewRef.current;
         if (!view) return;
@@ -67,9 +65,7 @@ export default function VegaEmbedChart({
                     view.signal(name, value);
                     changed = true;
                 }
-            } catch {
-                // Signal might not exist in the spec
-            }
+            } catch {}
         }
 
         if (changed) {
