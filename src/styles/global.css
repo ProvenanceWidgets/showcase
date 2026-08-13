@@ -193,14 +193,6 @@ textarea {
     border-bottom: 2px solid #e2e6e4;
 }
 
-
-.playground-page
-    > div:has(> .playground-grid)
-    > div:first-child
-    > div:last-child {
-    background-color: #eef1f0 !important;
-}
-
 .playground-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -276,55 +268,6 @@ textarea {
     > div[data-label]:has([data-provenance-slider-ticks]) {
     width: min(100%, 15.5rem) !important;
     max-width: 15.5rem;
-}
-
-:is(.playground-widget, .case-control__widget)
-    > div[data-label]
-    [data-provenance-slider-ticks]
-    > span:not(:empty) {
-    transform: translateX(-50%) !important;
-}
-
-:is(.playground-widget, .case-control__widget)
-    > div[data-label]:has([data-provenance-slider-ticks])
-    > div:has(> [data-provenance-chart-target]) {
-    left: -58px !important;
-    width: calc(100% + 80px) !important;
-}
-
-:is(.playground-widget, .case-control__widget)
-    > div[data-label]:has([data-provenance-slider-ticks])
-    > div:has(> [data-provenance-chart-target]):has(
-        [data-provenance-temporal-brush]
-    ) {
-    left: -86px !important;
-    width: calc(100% + 108px) !important;
-}
-
-:is(.playground-widget, .case-control__widget)
-    > div[data-label]:has([data-provenance-slider-ticks])
-    > div:has([data-provenance-temporal-brush])
-    :is([data-timeline-axis], [data-timeline-axis] + div) {
-    width: calc(100% - 76px) !important;
-    margin-left: 70px !important;
-}
-
-:is(.playground-widget, .case-control__widget)
-    > div[data-label]:has([data-provenance-slider-ticks])
-    > div:has(> [data-provenance-chart-target])
-    [data-timeline-axis]
-    + div
-    > span:first-child {
-    transform: translateX(-50%);
-}
-
-:is(.playground-widget, .case-control__widget)
-    > div[data-label]:has([data-provenance-slider-ticks])
-    > div:has(> [data-provenance-chart-target])
-    [data-timeline-axis]
-    + div
-    > span:last-child {
-    transform: translateX(50%);
 }
 
 :is(.playground-widget, .case-control__widget)
