@@ -57,6 +57,7 @@ const provenanceComponents = [
 ];
 
 export default function PlaygroundPage() {
+    const [provenanceMode, setProvenanceMode] = useState("interaction");
     const [checkboxSelection, setCheckboxSelection] = useState([
         "Chicken",
         "Beef",
@@ -76,8 +77,28 @@ export default function PlaygroundPage() {
                     className="playground-page__title-divider"
                     aria-hidden="true"
                 />
+                <div
+                    className="playground-mode-switch"
+                    role="group"
+                    aria-label="Provenance recording mode"
+                >
+                    <button
+                        type="button"
+                        aria-pressed={provenanceMode === "interaction"}
+                        onClick={() => setProvenanceMode("interaction")}
+                    >
+                        Interaction
+                    </button>
+                    <button
+                        type="button"
+                        aria-pressed={provenanceMode === "time"}
+                        onClick={() => setProvenanceMode("time")}
+                    >
+                        Time
+                    </button>
+                </div>
             </header>
-                <p className="playground-page__subtitle" style={{ textAlign: "center" }}>SuperWidget</p>
+            <p className="playground-page__subtitle">SuperWidget</p>
 
             <SuperProvenanceBoundary
                 id="playground-superprovenance"
@@ -96,6 +117,7 @@ export default function PlaygroundPage() {
                             selected={checkboxSelection}
                             onSelectedChange={setCheckboxSelection}
                             dataLabel="Meat"
+                            mode={provenanceMode}
                         />
                     </WidgetCard>
 
@@ -106,6 +128,7 @@ export default function PlaygroundPage() {
                             value={inputValue}
                             onChange={setInputValue}
                             dataLabel="Search"
+                            mode={provenanceMode}
                         />
                     </WidgetCard>
 
@@ -121,6 +144,7 @@ export default function PlaygroundPage() {
                             selected={ingredient}
                             onSelectedChange={setIngredient}
                             dataLabel="Pizza topping"
+                            mode={provenanceMode}
                         />
                     </WidgetCard>
 
@@ -134,6 +158,7 @@ export default function PlaygroundPage() {
                             onChange={setSingleSliderValue}
                             options={singleSliderOptions}
                             dataLabel="Single value"
+                            mode={provenanceMode}
                         />
                     </WidgetCard>
 
@@ -151,6 +176,7 @@ export default function PlaygroundPage() {
                             filter
                             showClear
                             dataLabel="City"
+                            mode={provenanceMode}
                         />
                     </WidgetCard>
 
@@ -168,6 +194,7 @@ export default function PlaygroundPage() {
                             filter
                             showClear
                             dataLabel="Cities"
+                            mode={provenanceMode}
                         />
                     </WidgetCard>
 
@@ -178,6 +205,7 @@ export default function PlaygroundPage() {
                             onChange={setRangeSliderValue}
                             options={rangeSliderOptions}
                             dataLabel="Range"
+                            mode={provenanceMode}
                         />
                     </WidgetCard>
                 </div>
