@@ -13,7 +13,7 @@
     "d3-color": "^3.1.0",
     "preact": "^10.29.2",
     "primereact": "^10.9.7",
-    "provenance-widgets": "^2.0.0",
+    "provenance-widgets": "^2.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.18.2",
